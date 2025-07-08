@@ -1,0 +1,25 @@
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Environment files
+.env
+.venv/
+env/
+venv/
+
+# OS junk
+.DS_Store
+Thumbs.db
+
+# Data files (optional — if you don't want to track exports)
+*.db
+*.csv
+*.json
+*.xlsx
+
+# IDE files
+.vscode/
+.idea/

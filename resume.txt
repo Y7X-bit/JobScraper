@@ -1,0 +1,37 @@
+John Doe
+Email: john.doe@example.com
+Location: Remote / New York, NY
+LinkedIn: linkedin.com/in/johndoe
+GitHub: github.com/johndoe
+
+---
+
+🧑‍💻 Skills:
+- Python, JavaScript, SQL
+- Web Scraping, APIs, Data Analysis
+- Machine Learning, Deep Learning
+- Pandas, NumPy, scikit-learn
+- Flask, Django
+
+---
+
+💼 Work Experience:
+Software Developer @ XYZ Corp (2021 - Present)
+- Built internal tools using Python and Flask
+- Created job data scrapers for HR analytics
+- Automated data pipelines with Pandas and SQL
+
+Data Analyst Intern @ ABC Inc (2020 - 2021)
+- Scraped and analyzed competitor job listings
+- Built dashboards with Matplotlib and Excel
+
+---
+
+🎓 Education:
+B.Tech in Computer Science - Tech University (2017 - 2021)
+
+---
+
+🚀 Projects:
+- Job Scraper: Scraped 1,000+ remote jobs and visualized insights
+- Resume Matcher: NLP-based job-resume similarity tool using spaCy
