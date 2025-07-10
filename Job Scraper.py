@@ -42,7 +42,8 @@ class GlassFrame(ctk.CTkFrame):
 class JobScraperApp(ctk.CTk):
     def __init__(self):
         super().__init__()
-        self.title("🔎 Job Scraper Pro | Powered by Y7X 💗")
+        today = datetime.date.today().strftime("%d %b %Y")
+        self.title(f"🔎 Job Scraper Pro — {today} | Powered by Y7X 💗")
         self.geometry("1050x700")
         self.jobs_data = []
         self.configure(fg_color="#000000")  # AMOLED background
