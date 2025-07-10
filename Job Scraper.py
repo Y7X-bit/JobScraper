@@ -13,15 +13,14 @@ from tkinter import filedialog, messagebox
 # Load spaCy NLP model
 nlp = spacy.load("en_core_web_sm")
 
-ctk.set_appearance_mode("System")
-ctk.set_default_color_theme("blue")
-
+ctk.set_appearance_mode("dark")
+ctk.set_default_color_theme("dark-blue")
 
 class HoverButton(ctk.CTkButton):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.default_color = self._fg_color
-        self.hover_color = kwargs.get("hover_color", "#6fb1fc")
+        self.hover_color = kwargs.get("hover_color", "#ff4c4c")
         self.bind("<Enter>", self.on_enter)
         self.bind("<Leave>", self.on_leave)
 
@@ -31,16 +30,14 @@ class HoverButton(ctk.CTkButton):
     def on_leave(self, event):
         self.configure(fg_color=self.default_color)
 
-
 class GlassFrame(ctk.CTkFrame):
     def __init__(self, master=None, **kwargs):
         super().__init__(master, **kwargs)
         self.configure(
-            fg_color="#2a2a2a",  # dark semi-glassy feel
+            fg_color=("#111111", "#111111"),
             border_width=1,
-            border_color="#444444"
+            border_color="#ff0000"
         )
-
 
 class JobScraperApp(ctk.CTk):
     def __init__(self):
@@ -48,15 +45,14 @@ class JobScraperApp(ctk.CTk):
         self.title("🔎 Job Scraper Pro | Powered by Y7X 💗")
         self.geometry("1050x700")
         self.jobs_data = []
-        self.configure(fg_color=("#f7f7f7", "#1a1a1a"))
+        self.configure(fg_color="#000000")  # AMOLED background
 
         self.create_widgets()
 
     def create_widgets(self):
-        header = ctk.CTkLabel(self, text="💼 Job Scraper Pro", font=("Arial Rounded MT Bold", 28), text_color="skyblue")
+        header = ctk.CTkLabel(self, text="💼 Job Scraper Pro", font=("Arial Rounded MT Bold", 28), text_color="#ff4c4c")
         header.pack(pady=10)
 
-        # Input Filters
         filter_frame = GlassFrame(self, corner_radius=12)
         filter_frame.pack(pady=10)
 
@@ -66,26 +62,23 @@ class JobScraperApp(ctk.CTk):
         self.location_entry = ctk.CTkEntry(filter_frame, placeholder_text="Enter location (e.g. Remote)", width=220)
         self.location_entry.grid(row=0, column=1, padx=10, pady=10)
 
-        self.scrape_button = HoverButton(filter_frame, text="🔍 Scrape Jobs", command=self.scrape_jobs_thread,
-                                         fg_color="deepskyblue", hover_color="#1e90ff")
+        self.scrape_button = HoverButton(filter_frame, text="🔍 Scrape Jobs", command=self.scrape_jobs_thread, fg_color="#ff0000", hover_color="#ff4c4c")
         self.scrape_button.grid(row=0, column=2, padx=10, pady=10)
 
-        # Results Frame
-        self.results_frame = ctk.CTkScrollableFrame(self, width=950, height=320, corner_radius=12)
+        self.results_frame = ctk.CTkScrollableFrame(self, width=950, height=320, corner_radius=12, fg_color="#000000")
         self.results_frame.pack(pady=10)
 
-        # Export Options
         export_frame = GlassFrame(self, corner_radius=10)
-        export_frame.pack(pady=10)
+        export_frame.pack(pady=0)
 
-        HoverButton(export_frame, text="💾 CSV", command=self.export_csv).pack(side="left", padx=6)
-        HoverButton(export_frame, text="📁 JSON", command=self.export_json).pack(side="left", padx=6)
-        HoverButton(export_frame, text="📊 Excel", command=self.export_excel).pack(side="left", padx=6)
-        HoverButton(export_frame, text="🗄️ Save to DB", command=self.save_to_db).pack(side="left", padx=6)
-        HoverButton(export_frame, text="📈 Visualize", command=self.visualize_data).pack(side="left", padx=6)
-        HoverButton(export_frame, text="🧠 Match Resume", command=self.match_resume).pack(side="left", padx=6)
+        HoverButton(export_frame, text="💾 CSV", command=self.export_csv, fg_color="#ff0000").pack(side="left", padx=6)
+        HoverButton(export_frame, text="📁 JSON", command=self.export_json, fg_color="#ff0000").pack(side="left", padx=6)
+        HoverButton(export_frame, text="📊 Excel", command=self.export_excel, fg_color="#ff0000").pack(side="left", padx=6)
+        HoverButton(export_frame, text="🗄️ Save to DB", command=self.save_to_db, fg_color="#ff0000").pack(side="left", padx=6)
+        HoverButton(export_frame, text="📈 Visualize", command=self.visualize_data, fg_color="#ff0000").pack(side="left", padx=6)
+        HoverButton(export_frame, text="🧠 Match Resume", command=self.match_resume, fg_color="#ff0000").pack(side="left", padx=6)
 
-        footer = ctk.CTkLabel(self, text="🔎 Powered by Y7X 💗", font=("Courier New", 14), text_color="gray")
+        footer = ctk.CTkLabel(self, text="🔎 Powered by Y7X 💗", font=("Courier New", 14), text_color="#ff4c4c")
         footer.pack(pady=10)
 
     def clear_results(self):
@@ -96,10 +89,20 @@ class JobScraperApp(ctk.CTk):
         card = GlassFrame(self.results_frame, corner_radius=10)
         card.pack(fill="x", padx=10, pady=5)
 
-        ctk.CTkLabel(card, text=f"💼 {job[0]}", font=("Arial", 16, "bold")).pack(anchor="w", padx=10)
-        ctk.CTkLabel(card, text=f"🏢 {job[1]}", font=("Arial", 14)).pack(anchor="w", padx=10)
-        ctk.CTkLabel(card, text=f"📍 {job[2]}", font=("Arial", 14)).pack(anchor="w", padx=10)
-        ctk.CTkLabel(card, text=f"🕒 Posted: {job[3]}", font=("Arial", 12, "italic"), text_color="gray").pack(anchor="w", padx=10)
+        content_frame = ctk.CTkFrame(card, fg_color="transparent")
+        content_frame.pack(fill="both", expand=True, padx=10, pady=10)
+
+        title = ctk.CTkLabel(content_frame, text=f"💼 {job[0]}", font=("Arial", 16, "bold"), text_color="#ff4c4c")
+        title.pack(anchor="w")
+
+        company = ctk.CTkLabel(content_frame, text=f"🏢 {job[1]}", font=("Arial", 14), text_color="white")
+        company.pack(anchor="w")
+
+        location = ctk.CTkLabel(content_frame, text=f"📍 {job[2]}", font=("Arial", 14), text_color="white")
+        location.pack(anchor="w")
+
+        date = ctk.CTkLabel(content_frame, text=f"🌐 Posted: {job[3]}", font=("Arial", 12, "italic"), text_color="gray")
+        date.pack(anchor="w")
 
     def scrape_jobs_thread(self):
         threading.Thread(target=self.scrape_jobs).start()
@@ -136,11 +139,11 @@ class JobScraperApp(ctk.CTk):
 
                 job_data = [job_title, company_name, job_location, job_date]
                 self.jobs_data.append(job_data)
-                self.display_job_card(job_data)
+                self.after(0, lambda job=job_data: self.display_job_card(job))
 
             page += 1
 
-        messagebox.showinfo("✅ Done", f"Scraped {len(self.jobs_data)} jobs across multiple pages.")
+        self.after(0, lambda: messagebox.showinfo("✅ Done", f"Scraped {len(self.jobs_data)} jobs across multiple pages."))
 
     def export_csv(self):
         with open("jobs.csv", "w", newline="", encoding="utf-8") as f:
@@ -179,7 +182,7 @@ class JobScraperApp(ctk.CTk):
         locations = [job[2] for job in self.jobs_data if job[2] != "N/A"]
         count = Counter(locations)
         fig, ax = plt.subplots(figsize=(7, 5))
-        ax.bar(count.keys(), count.values(), color="coral")
+        ax.bar(count.keys(), count.values(), color="#ff4c4c")
         ax.set_title("📍 Job Count by Location")
         ax.set_ylabel("Number of Jobs")
         ax.set_xlabel("Location")
@@ -209,7 +212,6 @@ class JobScraperApp(ctk.CTk):
 
         except Exception as e:
             messagebox.showerror("Error", f"Failed to match resume: {e}")
-
 
 if __name__ == "__main__":
     app = JobScraperApp()

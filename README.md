@@ -1,22 +1,29 @@
-# 🔍 Job Scraper | Powered by Y7X 💗
-
-A premium, dark-themed GUI tool to scrape remote job listings, match them with your resume using AI, and export them to various formats. Fully crafted with elegance, power, and the signature 🔥 Y7X touch.
+<h1 align="center">🔎 Job Scraper</h1>
+<p align="center"><strong>AMOLED GUI job scraper with resume matching, export options & graphing — built by Y7X 💗</strong></p>
 
 ---
 
-## 💼 Features
+<p align="center">
+  <img src="assets/1.png" width="400"/>
+  <img src="assets/2.png" width="400"/>
+</p>
 
-- 🔍 Scrape remote jobs from RemoteOK
-- 💾 Export to CSV, JSON, Excel
-- 🗄️ Save to SQLite database
-- 📈 Visualize job count by location
-- 🧠 Match jobs with your resume (using spaCy NLP)
-- 🌑 AMOLED UI + Red Glow accents — the Y7X experience
+---
+
+## ✨ Features
+- 🧠 **Resume Matching** using spaCy NLP
+- 📊 **Visualizations** (job counts by location)
+- 📍 **Location + Keyword Filters**
+- 📁 **Exports** to CSV, Excel, JSON & SQLite
+- 🖤 **AMOLED UI** with Red accents
+- 🧊 Smooth button hovers & clean UI layout
 
 ---
 
 ## 🚀 How to Run
 
 ```bash
+git clone https://github.com/Y7X-bit/JobScraper
+cd job-scraper-pro
 pip install -r requirements.txt
-python main.py
+python3 Job\ Scraper.py
