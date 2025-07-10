@@ -1,6 +1,12 @@
 <h1 align="center">🔎 Job Scraper</h1>
 <p align="center"><strong>AMOLED GUI job scraper with resume matching, export options & graphing — built by Y7X 💗</strong></p>
 
+<p align="center">
+  <a href="https://github.com/Y7X-bit/JobScraper">
+    <img alt="GitHub Repo" src="https://img.shields.io/badge/GitHub-View%20Repo-181717?style=for-the-badge&logo=github&logoColor=white">
+  </a>
+</p>
+
 ---
 
 <p align="center">
@@ -23,7 +29,7 @@
 ## 🚀 How to Run
 
 ```bash
-git clone https://github.com/Y7X-bit/JobScraper
-cd job-scraper-pro
+git clone https://github.com/Y7X-bit/JobScraper.git
+cd JobScraper
 pip install -r requirements.txt
 python3 Job\ Scraper.py
