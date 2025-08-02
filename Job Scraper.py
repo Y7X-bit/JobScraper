@@ -1,3 +1,6 @@
+# ----------------------------------------
+# 📦 Imports Section
+# ----------------------------------------
 import requests
 from bs4 import BeautifulSoup
 import csv, json, sqlite3, threading
@@ -13,32 +16,13 @@ from tkinter import filedialog, messagebox
 # Load spaCy NLP model
 nlp = spacy.load("en_core_web_sm")
 
+# Appearance Configuration
 ctk.set_appearance_mode("dark")
 ctk.set_default_color_theme("dark-blue")
 
-class HoverButton(ctk.CTkButton):
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self.default_color = self._fg_color
-        self.hover_color = kwargs.get("hover_color", "#ff4c4c")
-        self.bind("<Enter>", self.on_enter)
-        self.bind("<Leave>", self.on_leave)
-
-    def on_enter(self, event):
-        self.configure(fg_color=self.hover_color)
-
-    def on_leave(self, event):
-        self.configure(fg_color=self.default_color)
-
-class GlassFrame(ctk.CTkFrame):
-    def __init__(self, master=None, **kwargs):
-        super().__init__(master, **kwargs)
-        self.configure(
-            fg_color=("#111111", "#111111"),
-            border_width=1,
-            border_color="#ff0000"
-        )
-
+# ----------------------------------------
+# 💻 Main Application Class
+# ----------------------------------------
 class JobScraperApp(ctk.CTk):
     def __init__(self):
         super().__init__()
@@ -46,14 +30,19 @@ class JobScraperApp(ctk.CTk):
         self.title(f"🔎 Job Scraper Pro — {today} | Powered by Y7X 💗")
         self.geometry("1050x700")
         self.jobs_data = []
-        self.configure(fg_color="#000000")  # AMOLED background
+        self.configure(fg_color="#000000")  # AMOLED black
 
         self.create_widgets()
 
+    # ----------------------------------------
+    # 🎨 UI Setup Section
+    # ----------------------------------------
     def create_widgets(self):
+        # Header
         header = ctk.CTkLabel(self, text="💼 Job Scraper Pro", font=("Arial Rounded MT Bold", 28), text_color="#ff4c4c")
         header.pack(pady=10)
 
+        # Filter Inputs
         filter_frame = GlassFrame(self, corner_radius=12)
         filter_frame.pack(pady=10)
 
@@ -66,9 +55,11 @@ class JobScraperApp(ctk.CTk):
         self.scrape_button = HoverButton(filter_frame, text="🔍 Scrape Jobs", command=self.scrape_jobs_thread, fg_color="#ff0000", hover_color="#ff4c4c")
         self.scrape_button.grid(row=0, column=2, padx=10, pady=10)
 
+        # Scrollable Results Area
         self.results_frame = ctk.CTkScrollableFrame(self, width=950, height=320, corner_radius=12, fg_color="#000000")
         self.results_frame.pack(pady=10)
 
+        # Export + Action Buttons
         export_frame = GlassFrame(self, corner_radius=10)
         export_frame.pack(pady=0)
 
@@ -79,9 +70,13 @@ class JobScraperApp(ctk.CTk):
         HoverButton(export_frame, text="📈 Visualize", command=self.visualize_data, fg_color="#ff0000").pack(side="left", padx=6)
         HoverButton(export_frame, text="🧠 Match Resume", command=self.match_resume, fg_color="#ff0000").pack(side="left", padx=6)
 
+        # Footer
         footer = ctk.CTkLabel(self, text="🔎 Powered by Y7X 💗", font=("Courier New", 14), text_color="#ff4c4c")
         footer.pack(pady=10)
 
+    # ----------------------------------------
+    # 🛠️ Widget Creation Utilities
+    # ----------------------------------------
     def clear_results(self):
         for widget in self.results_frame.winfo_children():
             widget.destroy()
@@ -105,6 +100,9 @@ class JobScraperApp(ctk.CTk):
         date = ctk.CTkLabel(content_frame, text=f"🌐 Posted: {job[3]}", font=("Arial", 12, "italic"), text_color="gray")
         date.pack(anchor="w")
 
+    # ----------------------------------------
+    # 🔧 Utility Methods
+    # ----------------------------------------
     def scrape_jobs_thread(self):
         threading.Thread(target=self.scrape_jobs).start()
 
@@ -179,6 +177,9 @@ class JobScraperApp(ctk.CTk):
         conn.close()
         messagebox.showinfo("🗄️ Saved", "Jobs saved to jobs.db")
 
+    # ----------------------------------------
+    # 📊 Analysis Section
+    # ----------------------------------------
     def visualize_data(self):
         locations = [job[2] for job in self.jobs_data if job[2] != "N/A"]
         count = Counter(locations)
@@ -214,6 +215,36 @@ class JobScraperApp(ctk.CTk):
         except Exception as e:
             messagebox.showerror("Error", f"Failed to match resume: {e}")
 
+# ----------------------------------------
+# 🚀 Main Entry Point
+# ----------------------------------------
 if __name__ == "__main__":
     app = JobScraperApp()
     app.mainloop()
+
+
+# ----------------------------------------
+# 🌈 UI Helper Classes
+# ----------------------------------------
+class HoverButton(ctk.CTkButton):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.default_color = self._fg_color
+        self.hover_color = kwargs.get("hover_color", "#ff4c4c")
+        self.bind("<Enter>", self.on_enter)
+        self.bind("<Leave>", self.on_leave)
+
+    def on_enter(self, event):
+        self.configure(fg_color=self.hover_color)
+
+    def on_leave(self, event):
+        self.configure(fg_color=self.default_color)
+
+class GlassFrame(ctk.CTkFrame):
+    def __init__(self, master=None, **kwargs):
+        super().__init__(master, **kwargs)
+        self.configure(
+            fg_color=("#111111", "#111111"),
+            border_width=1,
+            border_color="#ff0000"
+        )

@@ -1,9 +1,9 @@
 <div align="center">
 
 # 💼 Job Scraper  
-**💼 Job Scraper — remote jobs, resume match, export-ready.**
+**💼 Job Scraper - remote jobs, resume match, export-ready.**
 
-Scrape remote job listings, match with your resume using NLP, and export everything — all in a dark-glass GUI.  
+Scrape remote job listings, match with your resume using NLP, and export everything all in a dark glass GUI.  
 Branded with 💗 by [Y7X-bit](https://github.com/Y7X-bit)
 
 <img src="assets/1.png" alt="Job Scraper UI Preview 1" width="600"/>
@@ -34,4 +34,4 @@ Branded with 💗 by [Y7X-bit](https://github.com/Y7X-bit)
 git clone https://github.com/Y7X-bit/JobScraper.git
 cd JobScraper
 pip install -r requirements.txt
-python main.py
+python Job Scraper.py
