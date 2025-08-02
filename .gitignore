@@ -20,6 +20,5 @@ Thumbs.db
 *.json
 *.xlsx
 
-# IDE files
 .vscode/
 .idea/
