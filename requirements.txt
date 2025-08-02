@@ -3,4 +3,4 @@ beautifulsoup4
 customtkinter
 matplotlib
 spacy
-pandas
+pandas.
